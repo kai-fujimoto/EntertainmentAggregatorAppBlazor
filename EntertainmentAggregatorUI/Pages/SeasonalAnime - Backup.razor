@@ -1,0 +1,61 @@
+﻿@page "/seasonal-anime3"
+<PageTitle>Seasonal Anime</PageTitle>
+@using EntertainmentAggregatorUI.Data
+
+<h1>Seasonal Anime</h1>
+@if (anime == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Poster</th>
+				<th>Title</th>
+				<th>Score</th>
+				<th>Day of Week</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var show in anime)
+			{
+				<tr>
+					<td><img src=@show.coverImage.medium /></td>
+					@if (show.title.english == null)
+					{
+						<td>@show.title.romaji</td>
+					}
+					else
+					{
+						<td>@show.title.english</td>
+					}
+					<td>@show.meanScore</td>
+					@if (show.nextAiringEpisode == null)
+					{
+						<td>Not Currently Airing</td>
+					}
+					else
+					{
+						<td>@AniListAPIAccess.dateToDay(show.nextAiringEpisode.airingAt)</td>
+					}
+					
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+
+@code {
+	private List<AniListContainer.Medium>? anime;
+	protected override async Task OnInitializedAsync()
+	{
+		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
+		anime = AniListAPIAccess.filterForMainSesaonal(anime);
+		anime.Sort(AniListAPIAccess.animeComparison);
+		anime.Reverse();
+
+	}
+}

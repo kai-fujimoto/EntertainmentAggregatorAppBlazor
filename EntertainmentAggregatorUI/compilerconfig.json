@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Pages/SeasonalAnime.razor.css",
+    "inputFile": "Pages/SeasonalAnime.razor.scss"
+  },
+  {
+    "outputFile": "Shared/CustomLayout.razor.css",
+    "inputFile": "Shared/CustomLayout.razor.scss"
+  }
+]

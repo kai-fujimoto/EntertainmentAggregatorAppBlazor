@@ -1,0 +1,107 @@
+﻿@page "/seasonal-anime"
+@layout CustomLayout
+<PageTitle>Seasonal Anime</PageTitle>
+@using EntertainmentAggregatorUI.Data
+<h1 style="color:azure; padding-left: 0.5em; padding-top: 1em; 'Open Sans', sans-serif;">Seasonal Anime</h1>
+<body-seasonal>
+@if (anime == null)
+{
+	<p style="color:azure"><em>Loading...</em></p>
+}
+else
+{
+	<div class="holder">
+		@foreach (var show in anime)
+		{
+			<div class="show">
+				<div class="face face1">
+					<div class="content">
+						<span class="stars"></span>
+						
+							@if (show.title.english == null)
+							{
+								<h2 class="animeTitle">@show.title.romaji</h2>
+							}
+							else
+							{
+								<h2 class="animeTitle">@show.title.english</h2>
+							}
+							<br>
+							@if (show.nextAiringEpisode != null)
+							{
+								<h5 class="nextEpisode" style="padding-bottom:10px">@AniListAPIAccess.calcTimeUntil(show)</h5>
+							}						   
+							else					   
+							{						   
+								<h5 class="nextEpisode" style="padding-bottom:10px">Complete</h5>
+							}
+
+
+							<div class="container-fluid">
+							<ul class="list-inline" style="padding-top:5px">
+							@foreach (var genre in show.genres)
+							{
+								<li class="list-inline-item" style="color:azure; padding-right:1rem">@genre</li>
+							}
+							</ul>
+							</div>
+
+							<div class="container-fluid">
+							<ul class="list-inline" style="padding-top:0.5em">
+							@foreach (var studio in show.studios.nodes)
+							{
+								<li class="list-inline-item" style="color:azure; padding-right: 1rem">@studio.name</li>
+							}
+							</ul>
+							</div>
+
+							<div class="container-fluid">
+								<ul class="list-inline" style="padding-top:0.5em">
+									<li class="list-inline-item" style="color:azure; padding-right: 1.5rem">@show.source</li>
+									<li class="list-inline-item" style="color:azure; padding-right: 1.5rem">@show.episodes eps X @show.duration min</li>
+									<li class="list-inline-item" style="color:azure; padding-right: 1.5rem">Score: @show.meanScore</li>
+								</ul>
+							</div>
+
+							<div class="overflow-auto" style="max-height:200px">
+								<p>
+								@((MarkupString)show.description)
+								</p>
+							</div>
+
+							<div class="container-fluid">
+								<ul class="list-inline" style="padding-top: 7px">
+								@foreach(var link in AniListAPIAccess.linkFilter(show))
+								{
+									<li class="list-inline-item" style="padding-right: 7px"><a href="@link.url" target="_blank"><img src="@link.icon" style="width:25px; height: auto"/></a></li>
+								}
+								</ul>
+							</div>
+
+
+
+
+						
+					</div>
+				</div>
+				<div class="face face2" style="background-image: url('@show.coverImage.extraLarge'); background-repeat:round; border-radius: 14px">
+					
+				</div>
+				
+			</div>
+		}
+	</div>
+}
+</body-seasonal>
+
+@code {
+	private List<AniListContainer.Medium>? anime;
+	protected override async Task OnInitializedAsync()
+	{
+		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
+		anime = AniListAPIAccess.filterForMainSesaonal(anime);
+		anime.Sort(AniListAPIAccess.animeComparison);
+		anime.Reverse();
+
+	}
+}
