@@ -17,7 +17,7 @@ else
 				<div class="face face1">
 					<div class="content">
 						<span class="stars"></span>
-						
+							<a href="@show.siteUrl" target="_blank">
 							@if (show.title.english == null)
 							{
 								<h2 class="animeTitle">@show.title.romaji</h2>
@@ -26,6 +26,7 @@ else
 							{
 								<h2 class="animeTitle">@show.title.english</h2>
 							}
+							</a>
 							<br>
 							@if (show.nextAiringEpisode != null)
 							{
@@ -63,7 +64,7 @@ else
 								</ul>
 							</div>
 
-							<div class="overflow-auto" style="max-height:200px">
+							<div class="overflow-auto" style="max-height:190px">
 								<p>
 								@((MarkupString)show.description)
 								</p>
