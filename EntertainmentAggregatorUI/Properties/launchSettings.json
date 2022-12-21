@@ -10,7 +10,6 @@
   "profiles": {
     "EntertainmentAggregatorUI": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7216;http://localhost:5216",
       "environmentVariables": {
