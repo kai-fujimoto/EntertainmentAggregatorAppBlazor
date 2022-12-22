@@ -32,7 +32,7 @@ namespace EntertainmentAggregatorUI.Data
             }
 
             //Console.WriteLine($"{now.Year}, {now.Year.GetType()}");
-            Console.WriteLine(season);
+            //Console.WriteLine(season);
 
             var seasonalAnimePage1 = await doQLQuery(1, season, now.Year);
             var seasonalAnimePage2 = await doQLQuery(2, season, now.Year);
