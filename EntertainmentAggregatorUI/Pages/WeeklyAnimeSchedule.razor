@@ -1,11 +1,11 @@
 ﻿@page "/weekly-schedule"
 @layout CustomLayout
 @using EntertainmentAggregatorUI.Data
+<PageTitle>Weekly Schedule</PageTitle>
+<h1 style="color:azure; padding-left: 0.5em; padding-top: 1em; 'Open Sans', sans-serif;">Weekly Anime</h1>
 <body>
 	@if (grouped == null)
 	{
-		<h1>Weekly Anime Schedule</h1>
-		<br /><br />
 		<p><em>Loading...</em></p>
 	}
 	else
