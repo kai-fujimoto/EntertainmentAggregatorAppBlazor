@@ -6,5 +6,9 @@
   {
     "outputFile": "Shared/CustomLayout.razor.css",
     "inputFile": "Shared/CustomLayout.razor.scss"
+  },
+  {
+    "outputFile": "Pages/WeeklyAnimeSchedule.razor.css",
+    "inputFile": "Pages/WeeklyAnimeSchedule.razor.scss"
   }
 ]

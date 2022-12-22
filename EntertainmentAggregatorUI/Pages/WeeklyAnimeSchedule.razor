@@ -1,0 +1,177 @@
+﻿@page "/weekly-schedule"
+@layout CustomLayout
+@using EntertainmentAggregatorUI.Data
+<body>
+	@if (grouped == null)
+	{
+		<h1>Weekly Anime Schedule</h1>
+		<br /><br />
+		<p><em>Loading...</em></p>
+	}
+	else
+	{
+		<div class="holder">
+			<div class="day">
+				<h1>Sunday</h1>
+				@foreach (var show in grouped["Sunday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium"/></a>
+						<div class="show-info">
+							@if (show.title.english==null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Monday</h1>
+				@foreach (var show in grouped["Monday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Tuesday</h1>
+				@foreach (var show in grouped["Tuesday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Wednesday</h1>
+				@foreach (var show in grouped["Wednesday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Thursday</h1>
+				@foreach (var show in grouped["Thursday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Friday</h1>
+				@foreach (var show in grouped["Friday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+			<div class="day">
+				<h1>Saturday</h1>
+				@foreach (var show in grouped["Saturday"])
+				{
+					<div class="show">
+						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+						<div class="show-info">
+							@if (show.title.english == null)
+							{
+								<h4>@show.title.romaji</h4>
+							}
+							else
+							{
+								<h4>@show.title.english</h4>
+							}
+							<h5>EP @show.nextAiringEpisode.episode</h5>
+						</div>
+
+					</div>
+				}
+			</div>
+
+		</div>
+	}
+</body>
+
+
+@code {
+	private List<AniListContainer.Medium>? anime;
+	private Dictionary<string, List<AniListContainer.Medium>>? grouped;
+
+	protected override async Task OnInitializedAsync()
+	{
+		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
+		anime = AniListAPIAccess.filterForMainSesaonal(anime);
+		grouped = AniListAPIAccess.groupByDay(anime);
+	}
+}

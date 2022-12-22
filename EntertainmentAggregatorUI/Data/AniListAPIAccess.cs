@@ -177,6 +177,29 @@ namespace EntertainmentAggregatorUI.Data
 
 
         }
+
+        public static Dictionary<string, List<Medium>> groupByDay(List<Medium> anime)
+        {
+            Dictionary<string, List<Medium>> grouped = new Dictionary<string, List<Medium>>();
+
+            grouped["Sunday"] = new List<Medium>();
+            grouped["Monday"] = new List<Medium>();
+            grouped["Tuesday"] = new List<Medium>();
+            grouped["Wednesday"] = new List<Medium>();
+            grouped["Thursday"] = new List<Medium>();
+            grouped["Friday"] = new List<Medium>();
+            grouped["Saturday"] = new List<Medium>();
+
+            foreach(var show in anime)
+            {
+                if (show.nextAiringEpisode == null)
+                {
+                    continue;
+                }
+                grouped[dateToDay(show.nextAiringEpisode.airingAt)].Add(show);
+            }
+            return grouped;
+        }
         
 
         public static string dateToDay(long timeStamp)

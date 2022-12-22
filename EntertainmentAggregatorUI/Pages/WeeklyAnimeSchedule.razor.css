@@ -1,0 +1,42 @@
+﻿body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #313030;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+body .holder {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(200px, 1fr));
+  padding: 35px;
+  grid-gap: 60px;
+  justify-content: space-between;
+}
+body .holder .day {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+body .holder .day h1 {
+  color: azure;
+}
+body .holder .day .show {
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(45px, 100px));
+  grid-gap: 15px;
+}
+body .holder .day .show img {
+  border-radius: 7px;
+}
+body .holder .day .show .show-info {
+  display: flex;
+  flex-direction: column;
+}
+body .holder .day .show .show-info h4 {
+  color: azure;
+}
+body .holder .day .show .show-info h5 {
+  color: azure;
+}
