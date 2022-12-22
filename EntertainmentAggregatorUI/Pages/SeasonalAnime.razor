@@ -11,10 +11,10 @@
 else
 {
 	<div class="holder">
-		@foreach (var show in anime)
+		@foreach (var (show, i) in Enumerate(anime))
 		{
-			<div class="show">
-				<div class="face face1">
+			<div class="show" style="background: @cardColors[i]">
+				<div class="face face1" @onclick="@(e => setColor(i))">
 					<div class="content">
 						<span class="stars"></span>
 							<a href="@show.siteUrl" target="_blank">
@@ -97,12 +97,42 @@ else
 
 @code {
 	private List<AniListContainer.Medium>? anime;
+	private string defColor = "#0000";
+	private string selectedColor = "#155928";
+	private string curColor = "0000";
+	private List<string> cardColors = new List<String>();
 	protected override async Task OnInitializedAsync()
 	{
 		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
 		anime = AniListAPIAccess.filterForMainSesaonal(anime);
 		anime.Sort(AniListAPIAccess.animeComparison);
 		anime.Reverse();
+		foreach (var show in anime)
+		{
+			cardColors.Add(defColor);
+		}
 
+	}
+
+	protected void setColor(int index)
+	{
+		if (cardColors[index] == defColor)
+		{
+			cardColors[index] = selectedColor;
+		}
+		else
+		{
+			cardColors[index] = defColor;
+		}
+		StateHasChanged();
+	}
+
+	protected IEnumerable<(T, int)> Enumerate<T>(IEnumerable<T> input, int start = 0)
+	{
+		int i = start;
+		foreach (var t in input)
+		{
+			yield return (t, i++);
+		}
 	}
 }
