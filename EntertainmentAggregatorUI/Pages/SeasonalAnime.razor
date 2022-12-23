@@ -1,8 +1,11 @@
 ﻿@page "/seasonal-anime"
 @layout CustomLayout
+@using DataAccessLibrary
+
+@inject IAnimeData _db
 <PageTitle>Seasonal Anime</PageTitle>
 @using EntertainmentAggregatorUI.Data
-<h1 style="color:azure; padding-left: 0.5em; padding-top: 1em; 'Open Sans', sans-serif;">Seasonal Anime</h1>
+<h1 style="color:azure; padding-left: 0.5em; padding-top: 1em; font-family: 'Open Sans', sans-serif;">Seasonal Anime</h1>
 <body-seasonal>
 @if (anime == null)
 {

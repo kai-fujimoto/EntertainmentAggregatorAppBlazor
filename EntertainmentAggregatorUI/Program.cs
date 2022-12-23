@@ -1,3 +1,4 @@
+using DataAccessLibrary;
 using EntertainmentAggregatorUI.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -15,6 +16,8 @@ namespace EntertainmentAggregatorUI
             builder.Services.AddServerSideBlazor();
             builder.Services.AddSingleton<WeatherForecastService>();
             builder.Services.AddSingleton<AniListAPIAccess>();
+            builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            builder.Services.AddTransient<IAnimeData, AnimeData>();
 
             var app = builder.Build();
 
