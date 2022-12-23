@@ -2,8 +2,8 @@
 {
 	public interface IAnimeData
 	{
-		Task DeleteAnime(int id);
-		Task<List<int>> GetSelectedAnime();
-		Task InsertAnime(int id);
+		Task DeleteAnime(AnimeModel anime);
+		Task<List<AnimeModel>> GetSelectedAnime();
+		Task InsertAnime(AnimeModel anime);
 	}
 }

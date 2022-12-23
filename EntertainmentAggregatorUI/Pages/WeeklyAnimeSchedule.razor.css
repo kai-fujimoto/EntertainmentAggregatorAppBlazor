@@ -30,6 +30,9 @@ body .holder .day .show {
   grid-template-columns: repeat(2, minmax(45px, 100px));
   grid-gap: 15px;
 }
+body .holder .day .show p {
+  color: azure;
+}
 body .holder .day .show img {
   border-radius: 7px;
 }

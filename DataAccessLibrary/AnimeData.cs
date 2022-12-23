@@ -15,26 +15,26 @@ namespace DataAccessLibrary
 			_db = db;
 		}
 
-		public Task<List<int>> GetSelectedAnime()
+		public Task<List<AnimeModel>> GetSelectedAnime()
 		{
 			string sql = "select * from dbo.Anime";
 
-			return _db.LoadData<int, dynamic>(sql, new { });
+			return _db.LoadData<AnimeModel, dynamic>(sql, new { });
 		}
 
-		public Task InsertAnime(int id)
+		public Task InsertAnime(AnimeModel anime)
 		{
-			string sql = @"insert into dbo.Anime (id)
-						   values (@id);";
+			string sql = @"insert into dbo.Anime (Id)
+						   values (@Id);";
 
-			return _db.SaveData(sql, id);
+			return _db.SaveData(sql, anime);
 		}
 
-		public Task DeleteAnime(int id)
+		public Task DeleteAnime(AnimeModel anime)
 		{
-			string sql = @"delete from dbo.Anime where id = (@id)";
+			string sql = @"delete from dbo.Anime where Id = (@Id)";
 
-			return _db.SaveData(sql, id);
+			return _db.SaveData(sql, anime);
 		}
 	}
 }

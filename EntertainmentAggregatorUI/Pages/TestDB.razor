@@ -1,0 +1,30 @@
+﻿@page "/TestDB"
+@using DataAccessLibrary
+
+@inject IAnimeData _db
+<h1>TestDB</h1>
+<h3>Current Selected Anime</h3>
+
+@if (selected == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	@foreach (var id in selected)
+	{
+		<p @onclick="e => _db.DeleteAnime(id)">@id.Id</p>
+	}
+}
+
+@code {
+	private List<AnimeModel>? selected;
+
+	protected override async Task OnInitializedAsync()
+	{
+		selected = await _db.GetSelectedAnime();
+		AnimeModel example = new AnimeModel();
+		example.Id = 43945;
+		//await _db.InsertAnime(example);
+	}
+}

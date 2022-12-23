@@ -4,6 +4,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #313030;
 }
 
 h1:focus {

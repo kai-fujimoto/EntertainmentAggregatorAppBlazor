@@ -32,6 +32,9 @@
                 display: grid;
                 grid-template-columns: repeat(2, minmax(45px, 100px));
                 grid-gap: 15px;
+                p {
+                    color: azure;
+                }
 
                 img {
                     border-radius: 7px;

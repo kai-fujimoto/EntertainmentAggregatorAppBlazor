@@ -1,6 +1,8 @@
 ﻿@page "/weekly-schedule"
 @layout CustomLayout
 @using EntertainmentAggregatorUI.Data
+@using DataAccessLibrary
+@inject IAnimeData _db
 <PageTitle>Weekly Schedule</PageTitle>
 <h1 style="color:azure; padding-left: 0.5em; padding-top: 1em; 'Open Sans', sans-serif;">Weekly Anime</h1>
 <body>
@@ -13,148 +15,221 @@
 		<div class="holder">
 			<div class="day">
 				<h1>Sunday</h1>
-				@foreach (var show in grouped["Sunday"])
+				@if (grouped["Sunday"].Count != 0)
+				{
+					@foreach (var show in grouped["Sunday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium"/></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium"/></a>
-						<div class="show-info">
-							@if (show.title.english==null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
+
+						<p>Nothing Scheduled For Today</p>
 
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Monday</h1>
-				@foreach (var show in grouped["Monday"])
+				@if (grouped["Monday"].Count != 0)
+				{
+					@foreach (var show in grouped["Monday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Tuesday</h1>
-				@foreach (var show in grouped["Tuesday"])
+				@if (grouped["Tuesday"].Count != 0)
+				{
+					@foreach (var show in grouped["Tuesday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Wednesday</h1>
-				@foreach (var show in grouped["Wednesday"])
+				@if (grouped["Wednesday"].Count != 0)
+				{
+
+
+					@foreach (var show in grouped["Wednesday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Thursday</h1>
-				@foreach (var show in grouped["Thursday"])
+				@if (grouped["Thursday"].Count != 0)
+				{
+
+
+					@foreach (var show in grouped["Thursday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Friday</h1>
-				@foreach (var show in grouped["Friday"])
+				@if (grouped["Friday"].Count != 0)
+				{
+
+
+					@foreach (var show in grouped["Friday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
 			<div class="day">
 				<h1>Saturday</h1>
-				@foreach (var show in grouped["Saturday"])
+				@if (grouped["Saturday"].Count != 0)
+				{
+
+
+					@foreach (var show in grouped["Saturday"])
+					{
+						<div class="show">
+							<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
+							<div class="show-info">
+								@if (show.title.english == null)
+								{
+									<h4>@show.title.romaji</h4>
+								}
+								else
+								{
+									<h4>@show.title.english</h4>
+								}
+								<h5>EP @show.nextAiringEpisode.episode</h5>
+							</div>
+
+						</div>
+					}
+				}
+				else
 				{
 					<div class="show">
-						<a href="@show.siteUrl"><img src="@show.coverImage.medium" /></a>
-						<div class="show-info">
-							@if (show.title.english == null)
-							{
-								<h4>@show.title.romaji</h4>
-							}
-							else
-							{
-								<h4>@show.title.english</h4>
-							}
-							<h5>EP @show.nextAiringEpisode.episode</h5>
-						</div>
-
+						<p>Nothing Scheduled For Today</p>
 					</div>
 				}
 			</div>
@@ -167,11 +242,34 @@
 @code {
 	private List<AniListContainer.Medium>? anime;
 	private Dictionary<string, List<AniListContainer.Medium>>? grouped;
-
+	private List<AnimeModel>? selected;
 	protected override async Task OnInitializedAsync()
 	{
 		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
 		anime = AniListAPIAccess.filterForMainSesaonal(anime);
+		selected = await _db.GetSelectedAnime();
+		anime = getOnlySelected(anime, selected);
 		grouped = AniListAPIAccess.groupByDay(anime);
 	}
+
+	protected List<AniListContainer.Medium> getOnlySelected(List<AniListContainer.Medium> all, List<AnimeModel> selected)
+	{
+		List<AniListContainer.Medium> temp = new List<AniListContainer.Medium>();
+		List<int> ids = new List<int>();
+		foreach (var model in selected)
+		{
+			ids.Add(model.Id);
+		}
+
+		foreach (var show in all)
+		{
+			if (ids.Contains(show.id))
+			{
+				temp.Add(show);
+			}
+		}
+
+		return temp;
+	}
+
 }

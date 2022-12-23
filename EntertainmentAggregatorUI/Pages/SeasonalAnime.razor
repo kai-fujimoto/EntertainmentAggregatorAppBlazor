@@ -17,7 +17,7 @@ else
 		@foreach (var (show, i) in Enumerate(anime))
 		{
 			<div class="show" style="background: @cardColors[i]">
-				<div class="face face1" @onclick="@(e => setColor(i))">
+				<div class="face face1" @onclick="@(e => setColorAndAccessDB(i, show.id))">
 					<div class="content">
 						<span class="stars"></span>
 							<a href="@show.siteUrl" target="_blank">
@@ -104,28 +104,49 @@ else
 	private string selectedColor = "#155928";
 	private string curColor = "0000";
 	private List<string> cardColors = new List<String>();
+	private List<AnimeModel> selected = new List<AnimeModel>();
 	protected override async Task OnInitializedAsync()
 	{
 		anime = await AniListAPIAccess.getCurrentSeasonalAnime();
 		anime = AniListAPIAccess.filterForMainSesaonal(anime);
 		anime.Sort(AniListAPIAccess.animeComparison);
 		anime.Reverse();
+		selected = await _db.GetSelectedAnime();
+		List<int> animeIds = new List<int>();
+		foreach (var anime in selected)
+		{
+			animeIds.Add(anime.Id);
+
+		}
 		foreach (var show in anime)
 		{
-			cardColors.Add(defColor);
+			if (animeIds.Contains(show.id))
+			{
+				cardColors.Add(selectedColor);
+			}
+			else
+			{
+				cardColors.Add(defColor);
+			}
 		}
 
 	}
 
-	protected void setColor(int index)
+	protected void setColorAndAccessDB(int index, int animeID)
 	{
 		if (cardColors[index] == defColor)
 		{
 			cardColors[index] = selectedColor;
+			AnimeModel toAdd = new AnimeModel();
+			toAdd.Id = animeID;
+			_db.InsertAnime(toAdd);
 		}
 		else
 		{
 			cardColors[index] = defColor;
+			AnimeModel toDelete = new AnimeModel();
+			toDelete.Id = animeID;
+			_db.DeleteAnime(toDelete);
 		}
 		StateHasChanged();
 	}
